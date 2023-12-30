@@ -1,4 +1,13 @@
+import {useEffect, useState} from "react";
+
 function Form() {
+
+  const [patients, setPatients] = useState([]);
+
+  setPatients(["patient1", "patient2", "patient3"]);
+
+  console.log(patients);
+
   return (
     <div className="md:w-1/2 lg:w-2/5 px-3">
       <h2 className="font-black text-3xl text-center">Patient Monitoring</h2>

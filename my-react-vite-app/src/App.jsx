@@ -1,11 +1,13 @@
-import TaskList from './TaskList';
+// import TaskList from './TaskList';
+import CounterApp from './CounterApp'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <TaskList />
+      {/* <TaskList /> */}
+      <CounterApp value={2} />
     </>
   )
 }

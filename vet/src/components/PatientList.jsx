@@ -1,6 +1,10 @@
+import PropTypes from 'prop-types';
 import Patient from "./Patient"
 
-function PatientList() {
+function PatientList({ patients }) {
+  // console.log(patients);
+  // {patients} is the same as props.patients, is an array of objects
+
   return (
     <div className="md:w-1/2 lg:w-3/5">
       <h2 className="font-black text-3xl text-center">Manage your</h2>
@@ -10,18 +14,21 @@ function PatientList() {
         Appointments
       </p>
       <div className="md:h-screen md:overflow-y-scroll">
-      <Patient/>
-      <Patient/>
-      <Patient/>
-      <Patient/>
-      <Patient/>
-      <Patient/>
-      <Patient/>
+
+        {
+          patients.map(patient => {
+            // console.log(patient);
+            return <Patient key={patient.id} patient={patient} />
+          })
+        }
+
       </div>
-      
-      
     </div>
   )
 }
+
+PatientList.propTypes = {
+  patients: PropTypes.array.isRequired,
+};
 
 export default PatientList

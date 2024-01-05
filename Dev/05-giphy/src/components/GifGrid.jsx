@@ -1,24 +1,35 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react'
-import { getGifs } from '../helpers/getGifs'
+// import { useEffect, useState } from 'react'
+// import { getGifs } from '../helpers/getGifs'
+import useFetchGifs from '../hooks/useFetchGifs';
 import GifItem from './GifItem';
 
 function GifGrid({ category }) {
 
-    const [images, setImages] = useState([])
+    // const [images, setImages] = useState([])
 
-    const getImages = async () => {
-        const newImages = await getGifs(category);
-        setImages(newImages);
-    }
+    // const getImages = async () => {
+    //     const newImages = await getGifs(category);
+    //     setImages(newImages);
+    // }
 
-    useEffect(() => {
-        getImages();
-    }, [])
+    // useEffect(() => {
+    //     getImages();
+    // }, [])
+
+    // Custom Hook
+    const { images, isLoading } = useFetchGifs(category);
+
+    // console.log(images, isLoading);
 
     return (
         <>
             <h3>{category}</h3>
+
+            {
+                isLoading && (<p>Cargando...</p>)
+            }
+
             <div className='card-grid'>
                 {
                     // images.map(({id, url, title}) => (

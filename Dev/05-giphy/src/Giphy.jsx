@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import AddCategory from './components/AddCategory';
-import GifGrid from './components/GifGrid';
+import {AddCategory, GifGrid} from './components';
 
 function Giphy() {
 
-    const [categories, setCategories] = useState(['One Punch']);
+    const [categories, setCategories] = useState(['Bleach']);
 
     const onAddCategory = (newCategory) => {
 
@@ -22,13 +21,12 @@ function Giphy() {
                 onAddCategory={onAddCategory}
             />
 
-
-            {categories.map((category) => (
-                <GifGrid key={category} category={category} />
-            ))}
-
-
-            <button onClick={onAddCategory}>Add</button>
+            {categories.map((category) => 
+                    (
+                        <GifGrid key={category} category={category} />
+                    )
+                )
+            }
         </>
     )
 }

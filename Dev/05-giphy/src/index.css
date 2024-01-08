@@ -38,10 +38,12 @@ h3 {
 }
 
 .card-grid {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center; */
+  columns: 4 350px;
+  gap: 1rem;
 }
 
 .card {

@@ -310,6 +310,8 @@ main {
     gap: 2rem;
     margin-bottom: 2rem;
     width: 100%;
+    user-select: none;
+    cursor: pointer;
 }
 
 .expense-amount {
@@ -349,9 +351,9 @@ main {
     font-weight: 700;
 }
 
-.expense-description .expense-name:hover {
+/* .expense-description .expense-name:hover {
     cursor: pointer;
-}
+} */
 
 .expense-description .expense-date {
     font-size: 1.8rem;
@@ -451,4 +453,8 @@ body .modal {
     align-items: center;
     font-size: 2.4rem;
     text-align: right;
+}
+
+.progressbar {
+    text-align: center;
 }

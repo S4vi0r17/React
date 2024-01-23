@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import NewBudgetIcon from './img/nuevo-gasto.svg';
 import { generateID } from './helpers';
@@ -14,26 +14,53 @@ const ExpenseController = () => {
 
 	const [expenses, setExpenses] = useState([]);
 
+	const [editExpense, setEditExpense] = useState({});
+
+	useEffect(() => {
+		if (Object.keys(editExpense).length > 0) {
+			setTimeout(() => {
+				setAnimateModal(true);
+			}, 250);
+			setModalIsOpen(true);
+		}
+	}, [editExpense]);
+
 	const handleNewExpense = () => {
 		setTimeout(() => {
 			setAnimateModal(true);
 		}, 250);
 		setModalIsOpen(true);
+		setEditExpense({});
 	};
 
 	const saveExpense = (expense) => {
-		expense.id = generateID();
-		expense.date = new Date();
-		setExpenses([...expenses, expense]);
+		if (expense.id) {
+			const newExpenses = expenses.map((item) =>
+				item.id === expense.id ? expense : item
+			);
+			setExpenses(newExpenses);
+			setEditExpense({});
+		} else {
+			expense.id = generateID();
+			expense.date = new Date();
+			setExpenses([...expenses, expense]);
+		}
+
 		setAnimateModal(false);
 		setTimeout(() => {
 			setModalIsOpen(false);
 		}, 500);
 	};
 
+	const deleteExpense = (id) => {
+		const newExpenses = expenses.filter((expense) => expense.id !== id);
+		setExpenses(newExpenses);
+	};
+
 	return (
 		<div className={modalIsOpen ? 'fixed' : ''}>
 			<Header
+				expenses={expenses}
 				budget={budget}
 				setBudget={setBudget}
 				isValidBudget={isValidBudget}
@@ -47,6 +74,8 @@ const ExpenseController = () => {
 							expenses={expenses}
 							setExpenses={setExpenses}
 							budget={budget}
+							setEditExpense={setEditExpense}
+							deleteExpense={deleteExpense}
 						/>
 					</main>
 					<div className='new-expense'>
@@ -65,6 +94,8 @@ const ExpenseController = () => {
 					animateModal={animateModal}
 					setAnimateModal={setAnimateModal}
 					saveExpense={saveExpense}
+					editExpense={editExpense}
+					setEditExpense={setEditExpense}
 				/>
 			)}
 		</div>

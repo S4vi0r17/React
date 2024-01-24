@@ -14,7 +14,7 @@ const NewBudget = ({ budget, setBudget, setIsValidBudget }) => {
 		}
 
 		setMessage('');
-        setIsValidBudget(true);
+		setIsValidBudget(true);
 	};
 
 	return (
@@ -44,7 +44,7 @@ const NewBudget = ({ budget, setBudget, setIsValidBudget }) => {
 NewBudget.propTypes = {
 	budget: PropTypes.number.isRequired,
 	setBudget: PropTypes.func.isRequired,
-    setIsValidBudget: PropTypes.func.isRequired
+	setIsValidBudget: PropTypes.func.isRequired,
 };
 
 export default NewBudget;

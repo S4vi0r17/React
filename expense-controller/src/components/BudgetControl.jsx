@@ -3,7 +3,13 @@ import { useState, useEffect } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const BudgetControl = ({ budget, expenses }) => {
+const BudgetControl = ({
+	budget,
+	setBudget,
+	expenses,
+	setExpenses,
+	setIsValidBudget,
+}) => {
 	const [available, setAvailable] = useState(0);
 	const [spent, setSpent] = useState(0);
 
@@ -31,6 +37,15 @@ const BudgetControl = ({ budget, expenses }) => {
 		}).format(budget);
 	};
 
+	const handleResetApp = () => {
+		const response = confirm('Are you sure you want to reset the app?');
+		if (response) {
+			setBudget(0);
+			setExpenses([]);
+			setIsValidBudget(false);
+		}
+	};
+
 	return (
 		<div className='budget-container container shadow two-columns'>
 			<div className='progressbar'>
@@ -40,7 +55,7 @@ const BudgetControl = ({ budget, expenses }) => {
 					text={`${percentage}% spent`}
 					styles={{
 						path: {
-							stroke: '#DC9FBD',
+							stroke: percentage > 100 ? '#dc2626' : '#DC9FBD',
 							transition: 'stroke-dashoffset 0.5s ease 0s',
 							color: '#DC9FBD',
 							transitionDuration: '1s',
@@ -49,19 +64,26 @@ const BudgetControl = ({ budget, expenses }) => {
 							stroke: '#f5f5f5',
 						},
 						text: {
-							fill: '#a46b88',
+							fill: percentage > 100 ? '#dc2626' : '#a46b88',
 							fontSize: '22px',
 						},
 					}}
 				/>
 			</div>
 			<div className='budget-content'>
+				<button
+					className='reset-app'
+					type='button'
+					onClick={handleResetApp}
+				>
+					Restart App
+				</button>
 				<p>
 					<span>Remaining: </span>
 					{formatBudget(budget)}
 				</p>
 
-				<p>
+				<p className={`${available < 0 ? 'negative' : ''}`}>
 					<span>Available: </span>
 					{formatBudget(available)}
 				</p>
@@ -77,7 +99,10 @@ const BudgetControl = ({ budget, expenses }) => {
 
 BudgetControl.propTypes = {
 	budget: PropTypes.number.isRequired,
+	setBudget: PropTypes.func.isRequired,
 	expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+	setExpenses: PropTypes.func.isRequired,
+	setIsValidBudget: PropTypes.func.isRequired,
 };
 
 export default BudgetControl;

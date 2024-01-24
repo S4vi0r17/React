@@ -7,19 +7,42 @@ const ExpenseList = ({
 	budget,
 	setEditExpense,
 	deleteExpense,
+	filter,
+	filteredExpenses,
 }) => {
 	return (
 		<div className='expense-list container'>
-			<h2>{expenses.length ? 'Expense List' : 'No expenses yet'}</h2>
-
-			{expenses.map((expense) => (
-				<Expense
-					key={expense.id}
-					expense={expense}
-					setEditExpense={setEditExpense}
-					deleteExpense={deleteExpense}
-				/>
-			))}
+			{filter ? (
+				<>
+					<h2>
+						{filteredExpenses.length
+							? 'Expense List'
+							: 'No expenses in this category yet'}
+					</h2>
+					{filteredExpenses.map((expense) => (
+						<Expense
+							key={expense.id}
+							expense={expense}
+							setEditExpense={setEditExpense}
+							deleteExpense={deleteExpense}
+						/>
+					))}
+				</>
+			) : (
+				<>
+					<h2>
+						{expenses.length ? 'Expense List' : 'No expenses yet'}
+					</h2>
+					{expenses.map((expense) => (
+						<Expense
+							key={expense.id}
+							expense={expense}
+							setEditExpense={setEditExpense}
+							deleteExpense={deleteExpense}
+						/>
+					))}
+				</>
+			)}
 		</div>
 	);
 };
@@ -29,6 +52,9 @@ ExpenseList.propTypes = {
 	setExpenses: PropTypes.func.isRequired,
 	budget: PropTypes.number.isRequired,
 	setEditExpense: PropTypes.func.isRequired,
+	deleteExpense: PropTypes.func.isRequired,
+	filter: PropTypes.string.isRequired,
+	filteredExpenses: PropTypes.array.isRequired,
 };
 
 export default ExpenseList;

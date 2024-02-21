@@ -1,10 +1,8 @@
 const currencies = [
-    { id: 'USD', name: 'USA DOLLAR' },
-    { id: 'MEM', name: 'Peso mexicano' },
+    { id: 'USD', name: 'US Dollar' },
+    { id: 'MXM', name: 'Mexican Peso' },
     { id: 'EUR', name: 'Euro' },
-    { id: 'PEN', name: 'Sol peruano' }
-]
+    { id: 'PEN', name: 'Peruvian Sol' }
+];
 
-export {
-    currencies
-}
+export { currencies };

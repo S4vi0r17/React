@@ -40,6 +40,7 @@ function GifGrid({ category }) {
                         <GifItem
                             key={image.id}
                             {...image}
+                            // esto es lo mismo que hacer url={image.url} title={image.title}
                         />
                     ))
                 }

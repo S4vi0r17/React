@@ -7,10 +7,24 @@ import db from './data'
 function App() {
 
   const [guitars,] = useState(db)
+  const [cart, setCart] = useState([])
+
+  const addToCart = (item) => {
+    let itemIndex = cart.findIndex(i => i.id === item.id)
+
+    if (itemIndex >= 0) {
+      let updatedCart = [...cart]
+      updatedCart[itemIndex].quantity++
+      setCart(updatedCart)
+    } else {
+      let newItem = { ...item, quantity: 1 }
+      setCart([...cart, newItem])
+    }
+  }
 
   return (
     <>
-      <Header />
+      <Header cart={cart} />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
@@ -21,10 +35,8 @@ function App() {
             guitars.map((guitar) => (
               <Guitar
                 key={guitar.id}
-                name={guitar.name}
-                image={guitar.image}
-                description={guitar.description}
-                price={guitar.price}
+                guitar={guitar}
+                addToCart={addToCart}
               />
             )
             )

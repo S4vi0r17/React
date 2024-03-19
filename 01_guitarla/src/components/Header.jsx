@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import Cart from "./Cart"
 
-const Header = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart }) => {
+const Header = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, cartIsEmpty, cartTotal }) => {
     return (
         <header className="py-5 header">
             <div className="container-xl">
@@ -23,6 +23,8 @@ const Header = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clea
                                 increaseQuantity={increaseQuantity}
                                 decreaseQuantity={decreaseQuantity}
                                 clearCart={clearCart}
+                                cartIsEmpty={cartIsEmpty}
+                                cartTotal={cartTotal}
                             />
                         </div>
                     </nav>
@@ -37,7 +39,9 @@ Header.propTypes = {
     removeFromCart: PropTypes.func.isRequired,
     increaseQuantity: PropTypes.func.isRequired,
     decreaseQuantity: PropTypes.func.isRequired,
-    clearCart: PropTypes.func.isRequired
+    clearCart: PropTypes.func.isRequired,
+    cartIsEmpty: PropTypes.bool.isRequired,
+    cartTotal: PropTypes.number.isRequired
 }
 
 export default Header

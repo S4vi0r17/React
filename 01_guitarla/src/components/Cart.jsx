@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 
-const Cart = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity }) => {
+const Cart = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart }) => {
 
     const cartIsEmpty = useMemo(() => cart.length === 0, [cart])
     // useMemo: It is a hook that allows you to memorize the result of a function and only re-execute it if one of its dependencies changes. It is useful when you have a function that is computationally expensive and you only want to execute it when necessary. In VUE, this is similar to a computed property.
@@ -70,11 +70,16 @@ const Cart = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity }) => {
                                 </tbody>
                             </table>
                             <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
+                            <button
+                                className="btn btn-dark w-100 mt-3 p-2"
+                                onClick={clearCart}
+                            >
+                                Vaciar Carrito
+                            </button>
                         </>
                     )
             }
-
-            <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+            
         </div>
     )
 }
@@ -83,7 +88,8 @@ Cart.propTypes = {
     cart: PropTypes.array.isRequired,
     removeFromCart: PropTypes.func.isRequired,
     increaseQuantity: PropTypes.func.isRequired,
-    decreaseQuantity: PropTypes.func.isRequired
+    decreaseQuantity: PropTypes.func.isRequired,
+    clearCart: PropTypes.func.isRequired
 }
 
 export default Cart

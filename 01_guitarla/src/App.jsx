@@ -9,6 +9,9 @@ function App() {
   const [guitars,] = useState(db)
   const [cart, setCart] = useState([])
 
+  const MAX_ITEMS = 5
+  const MIN_ITEMS = 1
+
   const addToCart = (item) => {
     let itemIndex = cart.findIndex(i => i.id === item.id)
 
@@ -28,11 +31,33 @@ function App() {
     ))
   }
 
+  const increaseQuantity = (id) => {
+    let newQuantity = cart.map((guitar) => {
+      // if(guitar.id === id && guitar.quantity < 5)
+      if (guitar.id !== id || guitar.quantity >= MAX_ITEMS) return guitar
+      guitar.quantity++
+      return guitar
+    })
+    setCart(newQuantity)
+  }
+
+  const decreaseQuantity = (id) => {
+    let newQuantity = cart.map((guitar) => {
+      // if (guitar.id === id && guitar.quantity > 1)
+      if (guitar.id !== id || guitar.quantity <= MIN_ITEMS) return guitar
+      guitar.quantity--
+      return guitar
+    })
+    setCart(newQuantity)
+  }
+
   return (
     <>
       <Header
         cart={cart}
         removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
       />
 
       <main className="container-xl mt-5">

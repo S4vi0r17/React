@@ -16,6 +16,7 @@ function App() {
     let itemIndex = cart.findIndex(i => i.id === item.id)
 
     if (itemIndex >= 0) {
+      if (cart[itemIndex].quantity >= MAX_ITEMS) return
       let updatedCart = [...cart]
       updatedCart[itemIndex].quantity++
       setCart(updatedCart)

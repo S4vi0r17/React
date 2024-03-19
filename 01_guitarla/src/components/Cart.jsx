@@ -79,7 +79,7 @@ const Cart = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearC
                         </>
                     )
             }
-            
+
         </div>
     )
 }

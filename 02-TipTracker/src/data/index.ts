@@ -1,4 +1,4 @@
-import { MenuItem } from "../interface";
+import { MenuItem } from "../interfaces";
 
 export const menuItems: MenuItem[] = [
     {

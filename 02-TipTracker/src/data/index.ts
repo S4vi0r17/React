@@ -1,6 +1,6 @@
-import { MenuItem } from "../interfaces";
+import { IMenuItem } from "../interfaces";
 
-export const menuItems: MenuItem[] = [
+export const menuItems: IMenuItem[] = [
     {
         "id": 1,
         "name": "Small Wood-fired Pizza",

@@ -1,8 +1,8 @@
-import { MenuItem } from "../interfaces"
+import { IMenuItem } from "../interfaces"
 
 interface MenuItemProps {
-    item: MenuItem
-    addItem: (item: MenuItem) => void
+    item: IMenuItem
+    addItem: (item: IMenuItem) => void
 }
 
 const MenuItem = ({ item, addItem }: MenuItemProps) => {

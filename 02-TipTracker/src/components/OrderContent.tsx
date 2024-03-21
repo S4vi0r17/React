@@ -10,7 +10,7 @@ interface OrderContentProps {
 const OrderContent = ({ order, removeItem }: OrderContentProps) => {
     return (
         <div>
-            <div className="space-y-3 mt-5">
+            <div className="space-y-3">
                 {order.length === 0 ? (
                     <p className="text-center text-lg">Your order is empty</p>
                 ) : (

@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { ItemID, MenuItem, OrderItem } from '../interfaces'
+import { ItemID, IMenuItem, OrderItem } from '../interfaces'
 
 const useOrder = () => {
     const [order, setOrder] = useState<OrderItem[]>([])
+    const [tip, setTip] = useState(0)
 
-    const addItem = (item: MenuItem) => {
+    const addItem = (item: IMenuItem) => {
 
         const itemExist = order.find(i => i.id === item.id)
 
@@ -23,11 +24,19 @@ const useOrder = () => {
         setOrder(newSummary)
     }
 
+    const placeOrder = () => {
+        setOrder([])
+        setTip(0)
+    }
+
     return {
         order,
+        tip,
+        setTip,
         setOrder,
         addItem,
-        removeItem
+        removeItem,
+        placeOrder
     }
 }
 

@@ -1,6 +1,21 @@
+import { ChangeEvent, useState } from 'react'
 import categories from '../data'
 
 const Form = () => {
+
+    const [activity, setActivity] = useState({
+        category: 1,
+        name: '',
+        calories: 0
+    })
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+        setActivity({
+            ...activity,
+            [e.target.id]: e.target.value
+        })
+    }
+
     return (
         <form
             className="space-y-5 bg-white shadow p-10 rounded-lg"
@@ -11,6 +26,9 @@ const Form = () => {
                     name="category"
                     id="category"
                     className="border border-slate-300 p-2 rounded-lg w-full bg-white outline-none focus:border-primary"
+                    value={activity.category}
+                    onChange={handleChange}
+                // onChange={e => setActivity({ ...activity, category: +e.target.value })}
                 >
                     {
                         categories.map(category => (
@@ -25,12 +43,15 @@ const Form = () => {
                 </select>
             </div>
             <div className="grid grid-cols-1 gap-3">
-                <label htmlFor="activity">Activity: </label>
+                <label htmlFor="name">Activity: </label>
                 <input
                     type="text"
-                    id='activity'
+                    id='name'
                     className='border border-slate-300 p-2 rounded-lg focus-within:outline-primary'
                     placeholder='Eg. orange juice, weights, salad...'
+                    value={activity.name}
+                    onChange={handleChange}
+                // onChange={e => setActivity({ ...activity, name: e.target.value })}
                 />
             </div>
             <div className="grid grid-cols-1 gap-3">
@@ -40,6 +61,8 @@ const Form = () => {
                     id='calories'
                     className='border border-slate-300 p-2 rounded-lg focus-within:outline-primary'
                     placeholder='Eg. 200, 500'
+                    value={activity.calories}
+                    onChange={handleChange}
                 />
             </div>
             <input

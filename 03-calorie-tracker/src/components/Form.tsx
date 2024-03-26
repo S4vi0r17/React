@@ -42,6 +42,11 @@ const Form = () => {
                     placeholder='Eg. 200, 500'
                 />
             </div>
+            <input
+                type="submit"
+                className='bg-secondary-200 hover:bg-primary w-full p-2 font-bold uppercase text-white cursor-pointer transition-colors'
+                value='Add Activity'
+            />
         </form>
     )
 }

@@ -19,6 +19,11 @@ const Form = () => {
         })
     }
 
+    const isValidActivity = () => {
+        const { name, calories } = activity
+        return name.trim() !== '' && calories > 0
+    }
+
     return (
         <form
             className="space-y-5 bg-white shadow p-10 rounded-lg"
@@ -70,8 +75,9 @@ const Form = () => {
             </div>
             <input
                 type="submit"
-                className='bg-secondary-200 hover:bg-primary w-full p-2 font-bold uppercase text-white cursor-pointer transition-colors'
-                value='Add Activity'
+                className='bg-secondary-200 hover:bg-primary w-full p-2 font-bold uppercase text-white cursor-pointer transition-colors disabled:opacity-10'
+                value={activity.category === 1 ? 'Add Food' : 'Add Activity'}
+                disabled={!isValidActivity()}
             />
         </form>
     )

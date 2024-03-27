@@ -5,9 +5,10 @@ const App = () => {
         <>
             <header className="bg-secondary-200 py-3">
                 <div className="max-w-4xl mx-auto flex justify-between">
-                    <h1 className="text-center text-lg font-bold text-white uppercase">
+                    {/* <h1 className="text-center text-lg font-bold text-white uppercase">
                         Calorie Counter
-                    </h1>
+                    </h1> */}
+                    <img src='/favicon.svg' alt="logo image" className="size-16" />
                     <button>
                         a
                     </button>

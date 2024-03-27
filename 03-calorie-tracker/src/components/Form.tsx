@@ -1,14 +1,21 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, Dispatch, FormEvent, useState } from 'react'
 import { Activity } from '../interfaces'
 import categories from '../data'
+import { ActivityActions } from '../reducers/activity-reducer'
 
-const Form = () => {
+interface FormProps {
+    dispatch: Dispatch<ActivityActions>
+}
 
-    const [activity, setActivity] = useState<Activity>({
-        category: 1,
-        name: '',
-        calories: 0
-    })
+const initialState = {
+    category: 1,
+    name: '',
+    calories: 0
+}
+
+const Form = ({ dispatch }: FormProps) => {
+
+    const [activity, setActivity] = useState<Activity>(initialState)
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
         const isNumber = ['category', 'calories'].includes(e.target.id)
@@ -26,7 +33,8 @@ const Form = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log('submit');
+        dispatch({ type: 'save-activity', payload: { newActivity: activity } })
+        setActivity(initialState)
     }
 
     return (
@@ -82,7 +90,7 @@ const Form = () => {
             <input
                 type="submit"
                 className='bg-secondary-200 hover:bg-primary w-full p-2 font-bold uppercase text-white cursor-pointer transition-colors disabled:opacity-10'
-                value={activity.category === 1 ? 'Add Food' : 'Add Activity'}
+                value={activity.category === 1 ? 'Add Food' : 'Add Exercise'}
                 disabled={!isValidActivity()}
             />
         </form>

@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, FormEvent, useState } from 'react'
+import { ActivityActions } from '../reducers/activity-reducer'
 import { Activity } from '../interfaces'
 import categories from '../data'
-import { ActivityActions } from '../reducers/activity-reducer'
 
 interface FormProps {
     dispatch: Dispatch<ActivityActions>

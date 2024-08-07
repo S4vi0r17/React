@@ -6,7 +6,7 @@ const categories: Category[] = [
         name: 'Food'
     },
     {
-        id: 1,
+        id: 2,
         name: 'Exercise'
     }
 ]

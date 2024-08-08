@@ -7,4 +7,12 @@ describe('Pruebas con async-await y Fetch', () => {
         expect(url.includes('https://')).toBe(true);
         expect(typeof url).toBe('string');
     });
+
+    test('debe de retornar un error', async () => {
+        try {
+            await getImagen();
+        } catch (error) {
+            expect(error).toBe('No existe');
+        }
+    });
 });

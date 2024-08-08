@@ -3,7 +3,7 @@ import { usContext } from '../../src/base-pruebas/06-deses-obj';
 
 describe('Pruebas en el archivo 06-deses-obj.js', () => {
 
-    test('debe retornar un string y un numero', () => {
+    test('debe retornar un objeto', () => {
 
         const testUser = {
             nombreClave: "Ironman",

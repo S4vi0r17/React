@@ -1,3 +1,5 @@
+import { describe, test, expect } from '@jest/globals';
+
 describe('Pruebas en <DemoComponent />', () => {
 
     test('Esta prueba no puede fallar', () => {

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const App = ({ title, subtitle, name }) => (
     <div>
-        <div data-testid="test-title">{title}</div>
+        <h1 data-testid="test-title">{title}</h1>
         <h2>{subtitle}</h2>
         <p>Hello, {name}!</p>
     </div>

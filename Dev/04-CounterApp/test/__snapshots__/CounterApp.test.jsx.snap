@@ -14,7 +14,9 @@ exports[`Pruebas en <CounterApp /> debe de mostrar <CounterApp /> correctamente 
     <button>
       -1
     </button>
-    <button>
+    <button
+      aria-label="btn-reset"
+    >
       reset
     </button>
     <button>

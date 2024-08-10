@@ -1,37 +1,38 @@
-import { useCounter } from "../hooks/useCounter"
+import { useCounter } from "../hooks/useCounter";
 
 const CounterWithCustomHook = () => {
+    const { counter, increase, reset, decrease } = useCounter(10);
 
-  const { counter, increase, reset, decrease } = useCounter(10)
+    return (
+        <div className="container mt-5 text-center">
+            <h1 className="mb-4">CounterApp with Custom Hook</h1>
+            <h2 className="mb-3">Counter: {counter}</h2>
+            <hr />
 
-  return (
-    <>
-      <h1>CounterApp with custom Hook</h1>
-      <br />
+            <div className="d-flex justify-content-center">
+                <button
+                    className="btn btn-danger mx-2"
+                    onClick={decrease}
+                >
+                    -1
+                </button>
 
-      <h2> Counter: {counter} </h2>
+                <button
+                    className="btn btn-secondary mx-2"
+                    onClick={reset}
+                >
+                    Reset
+                </button>
 
-      <hr />
+                <button
+                    className="btn btn-success mx-2"
+                    onClick={increase}
+                >
+                    +1
+                </button>
+            </div>
+        </div>
+    );
+};
 
-      <button
-        onClick={decrease}
-      >
-        -1
-      </button >
-
-      <button
-        onClick={reset}
-      >
-        reset
-      </button >
-
-      <button
-        onClick={increase}
-      >
-        +1
-      </button >
-    </>
-  )
-}
-
-export default CounterWithCustomHook
+export default CounterWithCustomHook;

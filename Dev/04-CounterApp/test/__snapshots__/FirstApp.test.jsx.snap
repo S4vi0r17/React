@@ -3,11 +3,11 @@
 exports[`Pruebas en <App /> debe de hacer match con el snapshot 1`] = `
 <div>
   <div>
-    <div
+    <h1
       data-testid="test-title"
     >
       Hello, Iron Man
-    </div>
+    </h1>
     <h2>
       Welcome to the world of React
     </h2>

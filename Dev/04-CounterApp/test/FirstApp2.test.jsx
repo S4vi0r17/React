@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import FirstApp from '../src/FirstApp';
 
 describe('Pruebas en <App />', () => {
-    
+
     const title = 'Hello, Iron Man';
     const subtitle = 'Welcome to the world of React';
 

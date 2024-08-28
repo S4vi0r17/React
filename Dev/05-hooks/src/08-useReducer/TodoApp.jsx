@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { todoReducer } from './todoReducer';
 import TodoList from './components/TodoList';
 import TodoAdd from './components/TodoAdd';
@@ -16,8 +16,18 @@ const initialState = [
     }
 ];
 
+const init = () => {
+    return JSON.parse(localStorage.getItem('todos') || [])
+}
+
 const TodoApp = () => {
-    const [state, dispatch] = useReducer(todoReducer, initialState);
+    const [state, dispatch] = useReducer(todoReducer, initialState, init);
+
+    useEffect(() => {
+        const todos = JSON.stringify(state)
+        localStorage.setItem('todos', todos)
+    }, [state])
+
 
     const totalTasks = state.length;
     const completedTasks = state.filter(todo => todo.done).length;

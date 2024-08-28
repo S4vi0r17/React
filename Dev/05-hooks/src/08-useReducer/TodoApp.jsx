@@ -48,10 +48,16 @@ const TodoApp = () => {
     }
 
     const onDeleteTask = (todo) => {
-        console.log(todo);
         dispatch({
             type: 'delete',
             payload: todo.id
+        })
+    }
+
+    const onToggleTask = (id) => {
+        dispatch({
+            type: 'toggle',
+            payload: id
         })
     }
 
@@ -69,7 +75,11 @@ const TodoApp = () => {
                             </small>
                         </div>
                     </div>
-                    <TodoList state={state} onDeleteTask={onDeleteTask} dispatch={dispatch} />
+                    <TodoList
+                        state={state}
+                        onDeleteTask={onDeleteTask}
+                        onToggleTask={onToggleTask}
+                        dispatch={dispatch} />
                 </div>
                 <div className='col-md-5'>
                     <h2 className="mb-4">Add To-Do</h2>

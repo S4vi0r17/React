@@ -24,7 +24,17 @@ const TodoApp = () => {
     const pendingTasks = totalTasks - completedTasks;
 
     const onNewTask = (todo) => {
-        console.log(todo);
+        // dispatch({
+        //     type: 'add',
+        //     payload: todo
+        // });
+
+        const action = {
+            type: 'add',
+            payload: todo
+        }
+
+        dispatch(action)
     }
 
     return (

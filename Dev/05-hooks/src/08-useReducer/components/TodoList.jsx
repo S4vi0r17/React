@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import TodoItem from './TodoItem'
 
-const TodoList = ({ state, dispatch }) => {
+const TodoList = ({ state, onDeleteTask, dispatch }) => {
     return (
         <ul className="list-group">
             {state.map((todo, index) => (
-                <TodoItem key={todo.id} todo={todo} index={index} dispatch={dispatch} />
+                <TodoItem key={todo.id} todo={todo} onDeleteTask={onDeleteTask} index={index} dispatch={dispatch} />
             ))}
         </ul>
     )
@@ -13,6 +13,7 @@ const TodoList = ({ state, dispatch }) => {
 
 TodoList.propTypes = {
     state: PropTypes.array.isRequired,
+    onDeleteTask: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
 }
 

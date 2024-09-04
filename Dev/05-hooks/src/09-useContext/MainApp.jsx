@@ -8,16 +8,24 @@ import UserProvider from './context/UserProvider';
 const MainApp = () => {
   return (
     <UserProvider>
-      <h1>MainApp</h1>
+      <div>
+        {/* Barra de navegación */}
+        <NavBar />
 
-      <NavBar />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+        {/* Contenido principal */}
+        <div className="container my-4">
+          <div className="row">
+            <div className="col">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </div>
     </UserProvider>
   );
 };

@@ -47,3 +47,11 @@
 </div>
 
 **You can visit it** [here](https://vet-gbp.netlify.app/).
+
+## 11 - Heroes App
+
+<div align="center">
+    <img src="assets/heroes-app.png" width="auto" alt="Heroes App">
+</div>
+
+**You can visit it** [here](https://heroes-app-gbp.netlify.app/).

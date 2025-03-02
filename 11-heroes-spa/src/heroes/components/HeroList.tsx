@@ -1,16 +1,20 @@
 import { Link } from 'react-router';
-import { heroes } from '../data/heroes';
 import { Publisher } from '../interfaces';
+import { getHeroesByPublisher } from '../helpers';
+import { useMemo } from 'react';
 
 interface Props {
   publisher: Publisher;
 }
 
 export const HeroList = ({ publisher }: Props) => {
-  const filteredHeroes = heroes.filter((hero) => hero.publisher === publisher);
+  const filteredHeroes = useMemo(
+    () => getHeroesByPublisher(publisher),
+    [publisher]
+  );
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 animate__animated animate__fadeIn">
       {filteredHeroes.map((hero) => (
         <div
           key={hero.id}

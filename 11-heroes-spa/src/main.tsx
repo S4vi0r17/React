@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router';
 
 import { HeroesApp } from './HeroesApp.tsx';
 
+import 'animate.css';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(

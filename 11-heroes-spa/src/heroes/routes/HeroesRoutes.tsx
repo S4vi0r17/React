@@ -4,7 +4,7 @@ import { MarvelPage, DCPage, SearchPage, HeroPage } from '../pages';
 
 export const HeroesRoutes = () => {
   return (
-    <>
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <NavBar />
 
       <Routes>
@@ -16,6 +16,6 @@ export const HeroesRoutes = () => {
 
         <Route path="/" element={<Navigate to={'/marvel'} />} />
       </Routes>
-    </>
+    </div>
   );
 };

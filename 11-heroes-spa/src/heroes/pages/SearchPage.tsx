@@ -1,8 +1,8 @@
-import { Search, ArrowRight } from 'lucide-react';
-import { getHeroesByPublisher } from '../helpers';
-import { useForm } from '../../hooks/useForm';
 import { useLocation, useNavigate } from 'react-router';
+import { Search, ArrowRight } from 'lucide-react';
 import queryString from 'query-string';
+import { useForm } from '../../hooks/useForm';
+import { getHeroesByName } from '../helpers/getHeroesByName';
 
 export const SearchPage = () => {
   const navigate = useNavigate();
@@ -10,22 +10,22 @@ export const SearchPage = () => {
 
   const { q = '' } = queryString.parse(location.search);
 
-  const filteredHeroes = getHeroesByPublisher('DC Comics');
+  const filteredHeroes = getHeroesByName(q as string);
 
   const { searchText, onInputChange } = useForm({
-    searchText: '',
+    searchText: q as string,
   });
 
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (searchText.trim().length <= 1) return;
+    // if (searchText.trim().length <= 1) return;
 
     navigate(`?q=${searchText}`);
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 animate__animated animate__fadeIn">
       {/* Contenido principal */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Sección de búsqueda */}
@@ -58,14 +58,20 @@ export const SearchPage = () => {
         {/* Resultados de búsqueda */}
         <div className="space-y-4">
           {filteredHeroes.length === 0 ? (
-            <p className="text-center text-zinc-600">
-              No se encontraron héroes que coincidan con tu búsqueda.
-            </p>
+            q === '' ? (
+              <p className="text-center text-zinc-600">
+                Realiza una búsqueda para encontrar héroes.
+              </p>
+            ) : (
+              <p className="text-center text-zinc-600">
+                No se encontraron héroes que coincidan con "{q}".
+              </p>
+            )
           ) : (
             filteredHeroes.map((hero) => (
               <div
                 key={hero.id}
-                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 animate__animated animate__bounceInLeft"
               >
                 <div className="flex flex-col sm:flex-row">
                   {/* Imagen del héroe */}
@@ -93,7 +99,10 @@ export const SearchPage = () => {
                     </div>
 
                     <div className="flex items-center self-end sm:self-center">
-                      <button className="group/btn flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors">
+                      <button
+                        onClick={() => navigate(`/hero/${hero.id}`)}
+                        className="group/btn flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
+                      >
                         <span>Ver detalle</span>
                         <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                       </button>

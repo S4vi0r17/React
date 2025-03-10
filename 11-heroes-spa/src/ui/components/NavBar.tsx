@@ -4,9 +4,10 @@ import { AuthContext } from '../../auth';
 
 export const NavBar = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const onLogout = () => {
+    logout();
     navigate('/login', { replace: true });
   };
 
@@ -58,7 +59,7 @@ export const NavBar = () => {
             onClick={onLogout}
             className="px-4 py-1.5 text-lg font-medium rounded-full cursor-pointer bg-zinc-100 hover:bg-zinc-200 transition-colors"
           >
-            Login
+            Logout
           </button>
         </div>
       </div>

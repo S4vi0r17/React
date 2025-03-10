@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../auth';
 
 export const NavBar = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const onLogout = () => {
     navigate('/login', { replace: true });
@@ -49,12 +52,15 @@ export const NavBar = () => {
           </nav>
         </div>
 
-        <button
-          onClick={onLogout}
-          className="px-4 py-1.5 text-lg font-medium rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors"
-        >
-          Login
-        </button>
+        <div className="flex items-center gap-4">
+          <span className="text-lg font-medium">{user?.name}</span>
+          <button
+            onClick={onLogout}
+            className="px-4 py-1.5 text-lg font-medium rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors"
+          >
+            Login
+          </button>
+        </div>
       </div>
     </header>
   );

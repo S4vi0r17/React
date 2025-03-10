@@ -12,13 +12,14 @@ export const LoginPage = () => {
 
   const handleLogin = async () => {
     setIsLoading(true);
-
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsLoading(false);
 
+    const lastPath = localStorage.getItem('lastPath') || '/';
+
     login('Gustavo');
 
-    navigate('/', { replace: true });
+    navigate(lastPath);
   };
 
   return (

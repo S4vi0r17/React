@@ -4,5 +4,8 @@ import { AuthContext } from '../auth';
 
 export const PublicRoute = ({ children }: { children: ReactNode }) => {
   const { logged } = useContext(AuthContext);
-  return !logged ? children : <Navigate to="/marvel" />;
+
+  const lastPath = localStorage.getItem('lastPath') || '/';
+
+  return !logged ? children : <Navigate to={lastPath} />;
 };

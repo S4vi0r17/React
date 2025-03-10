@@ -12,8 +12,8 @@ export const LoginPage = () => {
 
   const handleLogin = async () => {
     setIsLoading(true);
-    // Aquí iría la lógica de autenticación
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulación de carga
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsLoading(false);
 
     login('Gustavo');

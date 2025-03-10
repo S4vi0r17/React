@@ -9,8 +9,13 @@ const initialState = {
   user: undefined,
 };
 
+const init = () => {
+  const user = localStorage.getItem('user');
+  return user ? { logged: true, user: JSON.parse(user) } : initialState;
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [authState, dispatch] = useReducer(AuthReducer, initialState);
+  const [authState, dispatch] = useReducer(AuthReducer, initialState, init);
 
   const login = (name: string = '') => {
     const action: AuthAction = {
@@ -20,6 +25,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         name,
       },
     };
+
+    localStorage.setItem('user', JSON.stringify(action.payload));
+
     dispatch(action);
   };
 

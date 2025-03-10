@@ -77,7 +77,7 @@ export const SearchPage = () => {
                   {/* Imagen del héroe */}
                   <div className="relative w-full sm:w-48 aspect-[3/2] sm:aspect-auto">
                     <img
-                      src={`/assets/heroes/${hero.id}.jpg`}
+                      src={`/heroes/${hero.id}.jpg`}
                       alt={hero.superhero}
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -103,7 +103,7 @@ export const SearchPage = () => {
                         onClick={() => navigate(`/hero/${hero.id}`)}
                         className="group/btn flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
                       >
-                        <span>Ver detalle</span>
+                        <span className="cursor-pointer">Ver detalle</span>
                         <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                       </button>
                     </div>

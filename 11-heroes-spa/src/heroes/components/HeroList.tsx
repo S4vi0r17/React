@@ -22,7 +22,7 @@ export const HeroList = ({ publisher }: Props) => {
         >
           <div className="aspect-[3/4] overflow-hidden">
             <img
-              src={`/assets/heroes/${hero.id}.jpg`}
+              src={`/heroes/${hero.id}.jpg`}
               alt={hero.superhero}
               width={300}
               height={400}

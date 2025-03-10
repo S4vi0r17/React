@@ -24,7 +24,7 @@ export const HeroPage = () => {
           {/* Imagen del héroe */}
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg animate__animated animate__fadeInLeft">
             <img
-              src={`/assets/heroes/${hero.id}.jpg`}
+              src={`/heroes/${hero.id}.jpg`}
               alt={hero.superhero}
               className="object-cover w-full h-full"
             />

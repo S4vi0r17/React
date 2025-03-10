@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router';
-import { PrivateRoute } from './privateRoute';
+import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { LoginPage } from '../auth';
 import { HeroesRoutes } from '../heroes';

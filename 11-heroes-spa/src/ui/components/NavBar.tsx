@@ -56,7 +56,7 @@ export const NavBar = () => {
           <span className="text-lg font-medium">{user?.name}</span>
           <button
             onClick={onLogout}
-            className="px-4 py-1.5 text-lg font-medium rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors"
+            className="px-4 py-1.5 text-lg font-medium rounded-full cursor-pointer bg-zinc-100 hover:bg-zinc-200 transition-colors"
           >
             Login
           </button>

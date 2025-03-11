@@ -3,16 +3,21 @@ import { Activity } from '../interfaces';
 export type ActivityActions =
   | { type: 'save-activity'; payload: { newActivity: Activity } }
   | { type: 'set-active-id'; payload: { id: Activity['id'] } }
-  | { type: 'edit-activity'; payload: { updatedActivity: Activity } }
-  | { type: 'delete-activity'; payload: { id: Activity['id'] } };
+  | { type: 'delete-activity'; payload: { id: Activity['id'] } }
+  | { type: 'reset-app' };
 
 export interface ActivityState {
   activities: Activity[];
   activeId: Activity['id'];
 }
 
+const localStorageActivities = (): Activity[] => {
+  const activities = localStorage.getItem('activities');
+  return activities ? JSON.parse(activities) : [];
+};
+
 export const initialState: ActivityState = {
-  activities: [],
+  activities: localStorageActivities(),
   activeId: '',
 };
 
@@ -39,6 +44,7 @@ export const activityReducer = (
       activities: [...state.activities, action.payload.newActivity],
     };
   }
+
   if (action.type === 'set-active-id') {
     // Logic
 
@@ -47,5 +53,24 @@ export const activityReducer = (
       activeId: action.payload.id,
     };
   }
+
+  if (action.type === 'delete-activity') {
+    // Logic
+
+    return {
+      ...state,
+      activities: state.activities.filter(
+        (activity) => activity.id !== action.payload.id
+      ),
+    };
+  }
+
+  if (action.type === 'reset-app') {
+    return {
+      activities: [],
+      activeId: '',
+    };
+  }
+
   return state;
 };

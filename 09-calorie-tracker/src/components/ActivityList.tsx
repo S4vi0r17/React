@@ -11,7 +11,7 @@ export const ActivityList = ({ activities, dispatch }: Props) => {
   return (
     <section className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
       <h2 className="text-2xl font-bold mb-6 text-[#E95A6C]">Activity Log</h2>
-      <div className="flex-grow overflow-y-auto pr-2">
+      <div className="flex-grow overflow-y-auto pr-2 max-h-[50vh] custom-scrollbar">
         {activities.length === 0 ? (
           <div className="text-center py-8 text-gray-500 text-base">
             No activities added yet. Add your first activity to start tracking!
@@ -52,7 +52,15 @@ export const ActivityList = ({ activities, dispatch }: Props) => {
                   >
                     <Edit className="h-5 w-5" />
                   </button>
-                  <button className="text-gray-400 hover:text-[#E95A6C] transition-colors">
+                  <button
+                    onClick={() =>
+                      dispatch({
+                        type: 'delete-activity',
+                        payload: { id: activity.id },
+                      })
+                    }
+                    className="text-gray-400 hover:text-[#E95A6C] transition-colors"
+                  >
                     <Trash2 className="h-5 w-5" />
                   </button>
                 </div>

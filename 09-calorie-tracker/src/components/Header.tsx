@@ -1,10 +1,22 @@
 import { RotateCcw } from 'lucide-react';
+import { ActivityActions } from '../reducers/activity.reducer';
+import { useMemo } from 'react';
+import { Activity } from '../interfaces';
 
 interface Props {
-  handleReset: () => void;
+  activities: Activity[];
+  dispatch: React.Dispatch<ActivityActions>;
 }
 
-export const Header = ({ handleReset }: Props) => {
+export const Header = ({ activities, dispatch }: Props) => {
+  const handleReset = () => {
+    dispatch({ type: 'reset-app' });
+  };
+
+  const canResetApp = useMemo(() => {
+    return activities.length > 0;
+  }, [activities]);
+
   return (
     <header className="bg-white rounded-2xl shadow-lg p-4 mb-8 flex justify-between items-center">
       <div className="flex items-center">
@@ -21,7 +33,12 @@ export const Header = ({ handleReset }: Props) => {
       </div>
       <button
         onClick={handleReset}
-        className="bg-gray-100 text-gray-600 py-2 px-4 rounded-full hover:bg-gray-200 transition-colors flex items-center text-sm"
+        className={`py-2 px-4 rounded-full flex items-center text-sm transition -colors ${
+          canResetApp
+            ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+        }`}
+        disabled={!canResetApp}
       >
         <RotateCcw className="mr-2 h-4 w-4" />
         Reset All Data

@@ -1,14 +1,23 @@
-import { Plus } from 'lucide-react';
-import categories from '../data/index';
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
+import { v4 as uuidv4 } from 'uuid';
+import categories from '../data/index';
 import { Activity } from '../interfaces';
+import { ActivityActions } from '../reducers/activity.reducer';
 
-export const Form = () => {
-  const [activity, setActivity] = useState<Activity>({
-    category: 1,
-    name: '',
-    calories: '',
-  });
+interface Props {
+  dispatch: React.Dispatch<ActivityActions>;
+}
+
+const initialState: Activity = {
+  id: uuidv4(),
+  category: 1,
+  name: '',
+  calories: '',
+};
+
+export const Form = ({ dispatch }: Props) => {
+  const [activity, setActivity] = useState<Activity>(initialState);
 
   const handleChanges = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -37,7 +46,13 @@ export const Form = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('eviando');
+
+    dispatch({
+      type: 'save-activity',
+      payload: { newActivity: activity },
+    });
+
+    setActivity({ ...initialState, id: uuidv4() });
   };
 
   return (

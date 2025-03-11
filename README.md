@@ -32,13 +32,21 @@
 
 **You can visit it** [here](https://expense-controller-gbp.netlify.app/).
 
-## 07 - Cryptocurrencies
+## 08 - Cryptocurrencies
 
 <div align="center">
     <img src="assets/cryptocurrencies.png" width="auto" alt="Cryptocurrencies">
 </div>
 
 **You can visit it** [here](https://cryptocurrencies-gbp.netlify.app/).
+
+## 09 - Calorie Tracker
+
+<div align="center">
+    <img src="assets/calorie-tracker.png" width="auto" alt="Calorie Tracker">
+</div>
+
+**You can visit it** [here](https://calorie-tracker-gbp.netlify.app/).
 
 ## 10 - Vet
 

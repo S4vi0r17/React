@@ -23,7 +23,7 @@ const App = () => {
         <Header handleReset={() => {}} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <Form dispatch={dispatch} />
+          <Form state={state} dispatch={dispatch} />
 
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6 text-[#E95A6C]">Summary</h2>
@@ -58,7 +58,7 @@ const App = () => {
             </div>
           </div>
 
-          <ActivityList activities={state.activities} />
+          <ActivityList activities={state.activities} dispatch={dispatch} />
         </div>
       </div>
     </div>

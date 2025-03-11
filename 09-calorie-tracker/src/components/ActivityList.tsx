@@ -1,11 +1,13 @@
 import { Edit, Trash2 } from 'lucide-react';
 import { Activity } from '../interfaces';
+import { ActivityActions } from '../reducers/activity.reducer';
 
 interface Props {
   activities: Activity[];
+  dispatch: React.Dispatch<ActivityActions>;
 }
 
-export const ActivityList = ({ activities }: Props) => {
+export const ActivityList = ({ activities, dispatch }: Props) => {
   return (
     <section className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
       <h2 className="text-2xl font-bold mb-6 text-[#E95A6C]">Activity Log</h2>
@@ -23,7 +25,7 @@ export const ActivityList = ({ activities }: Props) => {
               >
                 <div className="flex items-center gap-4">
                   <span
-                    className={`px-3 py-1 text-sm font-semibold rounded-full ${
+                    className={`px-3 py-1 text-sm font-semibold rounded-full w-20 text-center ${
                       activity.category === 1
                         ? 'bg-[#E95A6C] text-white'
                         : 'bg-[#F5B78A] text-white'
@@ -39,7 +41,15 @@ export const ActivityList = ({ activities }: Props) => {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <button className="text-gray-400 hover:text-[#E95A6C] transition-colors">
+                  <button
+                    onClick={() =>
+                      dispatch({
+                        type: 'set-active-id',
+                        payload: { id: activity.id },
+                      })
+                    }
+                    className="text-gray-400 hover:text-[#E95A6C] transition-colors"
+                  >
                     <Edit className="h-5 w-5" />
                   </button>
                   <button className="text-gray-400 hover:text-[#E95A6C] transition-colors">

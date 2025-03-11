@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import categories from '../data/index';
 import { Activity } from '../interfaces';
-import { ActivityActions } from '../reducers/activity.reducer';
+import { ActivityActions, ActivityState } from '../reducers/activity.reducer';
 
 interface Props {
+  state: ActivityState;
   dispatch: React.Dispatch<ActivityActions>;
 }
 
@@ -16,8 +17,27 @@ const initialState: Activity = {
   calories: '',
 };
 
-export const Form = ({ dispatch }: Props) => {
+export const Form = ({ state, dispatch }: Props) => {
   const [activity, setActivity] = useState<Activity>(initialState);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (state.activeId) {
+      const activeActivity = state.activities.find(
+        (stateActivity) => stateActivity.id === state.activeId
+      );
+
+      setIsEditing(true);
+
+      setActivity(activeActivity!);
+
+      return () => {
+        setActivity({ ...initialState, id: uuidv4() });
+        dispatch({ type: 'set-active-id', payload: { id: '' } });
+        setIsEditing(false);
+      };
+    }
+  }, [state.activeId, state.activities, dispatch]);
 
   const handleChanges = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -123,8 +143,7 @@ export const Form = ({ dispatch }: Props) => {
         onClick={handleSubmit}
       >
         <Plus className="mr-2 h-5 w-5" />
-        {/* {false ? 'Update Activity' : 'Add Activity'} */}
-        {false
+        {isEditing
           ? 'Update Activity'
           : activity.category === 1
           ? 'Add Food'

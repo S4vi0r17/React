@@ -1,20 +1,28 @@
-import { Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { AddOutlined } from '@mui/icons-material';
 import { JournalLayout } from '../layout/JournalLayout';
+import { NoteView, NothingSelectedView } from '../view';
 
 export const JournalPage = () => {
   return (
     <JournalLayout>
-      <Typography>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel sagittis
-        enim, iaculis lacinia ex. Integer condimentum lacus augue, a accumsan
-        lectus facilisis non. Vivamus lobortis malesuada lectus. In hac
-        habitasse platea dictumst. Maecenas molestie iaculis urna, eget accumsan
-        libero tempus a. Fusce augue massa, tincidunt vel eros quis, imperdiet
-        lobortis velit.
-      </Typography>
+      <NothingSelectedView />
+      {/* <NoteView /> */}
 
-      {/* Nothing Selected */}
-      {/* Note view */}
+      <IconButton
+        size="large"
+        sx={{
+          color: 'white',
+          backgroundColor: 'error.main',
+          ':hover': { backgroundColor: 'error.main', opacity: 0.9 },
+          position: 'fixed',
+          bottom: 50,
+          right: 50,
+          zIndex: 100,
+        }}
+      >
+        <AddOutlined sx={{ fontSize: 30 }} />
+      </IconButton>
     </JournalLayout>
   );
 };

@@ -8,7 +8,7 @@ import {
   selectCount,
 } from './store/slices/counter/counterSlice';
 
-export default function App() {
+export default function CounterApp() {
   const counter = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
 

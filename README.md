@@ -63,3 +63,11 @@
 </div>
 
 **You can visit it** [here](https://heroes-app-gbp.netlify.app/).
+
+## 12 - Redux Toolkit
+
+<div align="center">
+    <img src="assets/redux-toolkit.png" width="auto" alt="Redux Toolkit">
+</div>
+
+**You can visit it** [here](https://redux-toolkit-gbp.netlify.app/). 

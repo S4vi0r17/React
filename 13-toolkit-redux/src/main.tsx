@@ -5,10 +5,16 @@ import { store } from './store';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router';
 import CounterApp from './CounterApp';
 import PokemonsApp from './PokemonsApp';
+import HomePage from './HomePage';
+import TodosApp from './TodosApp';
 
 import './index.css';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <HomePage />,
+  },
   {
     path: '/counter',
     element: <CounterApp />,
@@ -18,12 +24,12 @@ const router = createBrowserRouter([
     element: <PokemonsApp />,
   },
   {
-    path: '/',
-    element: <Navigate to={'/counter'} />,
+    path: '/todos',
+    element: <TodosApp />,
   },
   {
     path: '*',
-    element: <Navigate to={'/counter'} />,
+    element: <Navigate to={'/'} />,
   },
 ]);
 

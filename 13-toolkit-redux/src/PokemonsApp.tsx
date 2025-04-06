@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Search, Zap } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getPokemons } from './store/slices/pokemon/thunks';
 
-export default function PokemonList() {
+export default function PokemonApp() {
   const dispatch = useAppDispatch();
   const {
     isLoading,

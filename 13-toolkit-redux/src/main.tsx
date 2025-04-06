@@ -1,11 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router';
+import { store } from './store';
+import HomePage from './HomePage';
 import CounterApp from './CounterApp';
 import PokemonsApp from './PokemonsApp';
-import HomePage from './HomePage';
 import TodosApp from './TodosApp';
 
 import './index.css';

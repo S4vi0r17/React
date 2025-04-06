@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 import {
   ChevronLeft,
@@ -8,53 +8,23 @@ import {
   Home,
   Zap,
 } from 'lucide-react';
-
-interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { useGetTodoByIdQuery, useGetTodosQuery } from './store/apis/todosApi';
 
 export default function TodoApp() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [activeTodoIndex, setActiveTodoIndex] = useState(1);
 
-  useEffect(() => {
-    async function fetchTodos() {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          'https://jsonplaceholder.typicode.com/todos'
-        );
-        if (!response.ok) {
-          throw new Error('Failed to fetch todos');
-        }
-        const data = await response.json();
-        setTodos(data);
-        setError(null);
-      } catch (err) {
-        setError('Failed to load tasks. Neural connection disrupted.');
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchTodos();
-  }, []);
+  const { data: todos } = useGetTodosQuery();
+  const { data: todo, isLoading, error } = useGetTodoByIdQuery(activeTodoIndex);
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    if (activeTodoIndex === 1) return;
+    setActiveTodoIndex((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev < todos.length - 1 ? prev + 1 : prev));
+    if (!todos) return;
+    setActiveTodoIndex((prev) => (prev < todos.length - 1 ? prev + 1 : prev));
   };
-
-  const currentTodo = todos[currentIndex];
 
   return (
     <div className="min-h-screen bg-gray-900 p-4 md:p-8">
@@ -91,9 +61,13 @@ export default function TodoApp() {
         ) : error ? (
           <div className="flex h-64 flex-col items-center justify-center rounded-lg border border-red-800 bg-red-900/20 p-6">
             <XCircle className="mb-4 h-12 w-12 text-red-500" />
-            <p className="text-center font-mono text-red-400">{error}</p>
+            <p className="text-center font-mono text-red-400">
+              {error instanceof Error
+                ? error.message
+                : 'An unexpected error occurred.'}
+            </p>
           </div>
-        ) : todos.length > 0 ? (
+        ) : todos && todos.length > 0 ? (
           <div className="relative overflow-hidden rounded-lg border border-emerald-800 bg-gray-900 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
             {/* Task display */}
             <div className="relative p-6">
@@ -105,7 +79,7 @@ export default function TodoApp() {
                     TASK ID:{' '}
                   </span>
                   <span className="font-mono text-xs text-emerald-400">
-                    #{currentTodo.id.toString().padStart(3, '0')}
+                    #{todo?.id.toString().padStart(3, '0')}
                   </span>
                 </div>
                 <div className="rounded-full bg-gray-800 px-3 py-1">
@@ -113,20 +87,20 @@ export default function TodoApp() {
                     USER:{' '}
                   </span>
                   <span className="font-mono text-xs text-emerald-400">
-                    {currentTodo.userId}
+                    {todo?.userId}
                   </span>
                 </div>
               </div>
 
               <div className="mb-6 rounded-lg border border-emerald-800 bg-gray-800/50 p-4">
                 <h2 className="font-mono text-lg text-emerald-400">
-                  {currentTodo.title}
+                  {todo?.title}
                 </h2>
               </div>
 
               <div className="flex items-center gap-3">
                 <span className="font-mono text-sm text-gray-400">STATUS:</span>
-                {currentTodo.completed ? (
+                {todo?.completed ? (
                   <div className="flex items-center gap-2 rounded-full bg-emerald-900/30 px-3 py-1 text-emerald-400">
                     <CheckCircle size={16} />
                     <span className="font-mono text-sm">COMPLETED</span>
@@ -141,21 +115,21 @@ export default function TodoApp() {
 
               <div className="mt-6 flex items-center justify-between">
                 <div className="text-sm font-mono text-gray-500">
-                  TASK {currentIndex + 1} OF {todos.length}
+                  TASK {activeTodoIndex} OF {todos.length}
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handlePrevious}
-                    disabled={currentIndex === 0}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-800 bg-gray-900 text-emerald-400 transition-all hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={activeTodoIndex === 1}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-800 bg-gray-900 text-emerald-400 transition-all hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
                     <ChevronLeft size={18} />
                   </button>
 
                   <button
                     onClick={handleNext}
-                    disabled={currentIndex === todos.length - 1}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-800 bg-gray-900 text-emerald-400 transition-all hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={activeTodoIndex === todos.length - 1}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-800 bg-gray-900 text-emerald-400 transition-all hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
                     <ChevronRight size={18} />
                   </button>
@@ -168,7 +142,7 @@ export default function TodoApp() {
               <div
                 className="h-full bg-gradient-to-r from-emerald-500 to-emerald-300"
                 style={{
-                  width: `${((currentIndex + 1) / todos.length) * 100}%`,
+                  width: `${(activeTodoIndex / todos.length) * 100}%`,
                 }}
               ></div>
             </div>
